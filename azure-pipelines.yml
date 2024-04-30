@@ -35,7 +35,7 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'liquiDocker'
-    repository: 'liquizar/simple-react-app'
+    repository: 'Himasri-S/Simple-react-app'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     tags: 'latest'
