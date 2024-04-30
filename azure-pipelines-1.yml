@@ -1,0 +1,35 @@
+trigger:
+- main
+
+pool:
+  name: Default
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
+
+- task: CopyFiles@2
+  inputs:
+    Contents: '**/k8s/deploy.yaml'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'simple-react-app'
+    publishLocation: 'Container'
+  
+- task: Docker@2
+  inputs:
+    containerRegistry: 'liquiDocker'
+    repository: 'liquizar/simple-react-app'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: 'latest'
