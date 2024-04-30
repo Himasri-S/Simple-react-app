@@ -30,11 +30,11 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'simple-react-app'
     publishLocation: 'Container'
-  
+
 - task: Docker@2
   inputs:
-    containerRegistry: 'liquiDocker'
-    repository: 'liquizar/simple-react-app'
+    containerRegistry: 'docker'
+    repository: 'himasri/simple-react-app'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     tags: 'latest'
