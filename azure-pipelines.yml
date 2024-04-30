@@ -7,8 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
-  name: self-hosted
+  name: Default
 
 steps:
 - task: NodeTool@0
@@ -35,7 +34,9 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'liquiDocker'
-    repository: 'Himasri-S/Simple-react-app'
+    repository: 'liquizar/simple-react-app'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     tags: 'latest'
+    
+    
